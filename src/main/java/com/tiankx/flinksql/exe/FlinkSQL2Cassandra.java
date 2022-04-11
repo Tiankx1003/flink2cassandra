@@ -71,7 +71,7 @@ public class FlinkSQL2Cassandra {
         TableSchema schema = tmpTable.getSchema();
         String insertSql = CommonUtils.concatInsertSql(schema, paramMap);
         String registSql = CommonUtils.concatSchema(schema, paramMap);
-        LOG.info("get input param: {}\n\nparse insert sql: {}\n\nparseregist sql: {}", paramMap, insertSql, registSql);
+        LOG.info("get input param: {}\n\nparse insert sql: {}\n\nparse register sql: {}", paramMap, insertSql, registSql);
 
         CassandraClientUtil.initTable(paramMap);
 
@@ -104,6 +104,6 @@ public class FlinkSQL2Cassandra {
             throw new RuntimeException("job cancelled");
         }
 
-        LOG.info("job finished SUCCESSFULL");
+        LOG.info("job finished SUCCESSFULLY");
     }
 }
