@@ -1,0 +1,14 @@
+{
+  "sql": "select t1.col_1, t1.col_2, t2.col_2 from tab_1 t1 join tab_2 t2 on t1.col_1 = t2.col_1",
+  "hosts": "192.168.1.101",
+  "port": "9042",
+  "key_space": "test",
+  "table_name":"test_tiankx_00",
+  "username": "tiankx",
+  "password": "tiankx",
+  "format": "json",
+  "primary_key": "col_1",
+  "sink_parallelism": "30",
+  "data_time": "20220228",
+  "hive_conf_path": "xxxx/flinksql2cassandra/hive_conf"
+}
