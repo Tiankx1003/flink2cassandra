@@ -1,1 +1,1 @@
-com.tiankx.flink.hql.exe.cassandra.CassandraDynamicTableSinkFactory
+com.tiankx.flinksql.service.cassandra.CassandraDynamicTableSyncFactory
