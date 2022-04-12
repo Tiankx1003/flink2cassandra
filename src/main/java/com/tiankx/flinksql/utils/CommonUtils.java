@@ -121,7 +121,7 @@ public class CommonUtils {
 
         paramMap.put("cassandraTableInitSql", cassandraTableInitSql.toString());
         paramMap.put("deleteTableSql",
-                "DROP TABLE IF  EXISTS " + paramMap.get("key_space") + "." + paramMap.get("table_name"));
+                "DROP TABLE IF EXISTS " + paramMap.get("key_space") + "." + paramMap.get("table_name"));
 
         sb.append(")with (\n");
         sb.append("'connector' = 'cassandra', \n");
@@ -138,7 +138,6 @@ public class CommonUtils {
         sb.append("'insert_cassandra_sql' = '" + insertCassandraSql.toString() + "'\n");
         sb.append(")");
 
-        // TODO:
         return sb.toString();
     }
 

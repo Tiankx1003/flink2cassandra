@@ -37,7 +37,7 @@ public class FlinkJobHandler implements Runnable {
         StringBuilder errorSB = new StringBuilder();
         String realTableName = (String) infoMap.get("table_name");
         String tmpTableName = realTableName + "_flink_hql_tmp_table";
-        String cassandra_evn = (String) infoMap.get("cassandra_evn");
+        String cassandra_env = (String) infoMap.get("cassandra_env");
 
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder
@@ -94,7 +94,19 @@ public class FlinkJobHandler implements Runnable {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             StringBuilder infoSB = new StringBuilder();
-            // TODO:
+            while ((line = bufferedReader.readLine()) != null) {
+                LOG.info(line);
+                infoSB.append(line);
+            }
+            InputStream errorStream = start.getErrorStream();
+            BufferedReader errorBufferReader = new BufferedReader(new InputStreamReader(errorStream));
+            while ((line = errorBufferReader.readLine()) != null) {
+                LOG.info(line);
+                errorSB.append(line);
+            }
+            result = start.waitFor();
+            LOG.info("job exec result: {}", result);
+            sendResultMessageToKafka(result, errorSB.toString());
         } catch (Exception e) {
             sendResultMessageToKafka(1, "import job failed");
         }
